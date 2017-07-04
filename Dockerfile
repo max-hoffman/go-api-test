@@ -1,21 +1,8 @@
-FROM iron/go
-
+FROM iron/base
 WORKDIR /app
-
-ADD myapp /app/
-
-RUN cd $SRC_DIR; go build -o myapp; cp myapp /app/
-
-ENV PORT=8080
-
-ENV DB_USERNAME=postgres
-ENV DB_PASSWORD=""
-ENV DB_NAME=reactapp
-
-ENV TEST_DB_USERNAME=postgres
-ENV TEST_DB_PASSWORD=postgres
-ENV TEST_DB_NAME=reactapptest
+# copy binary into image
+COPY myapp /app/
+ENTRYPOINT ["./myapp"]
 
 EXPOSE 8080
 
-ENTRYPOINT ["./myapp"]
